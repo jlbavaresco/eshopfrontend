@@ -1,26 +1,44 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@popperjs/core/dist/cjs/popper.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import Menu from './componentes/Menu'
-import Home from './componentes/Home'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import React from 'react';
+import Home from './componentes/telas/Home'
 import Categoria from './componentes/telas/categoria/Categoria'
 import Produto from './componentes/telas/produto/Produto'
+import NotFound from "./componentes/telas/NotFound";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Menu />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "categorias",
+        element: <Categoria />,
+      },
+      {
+        path: "produtos",
+        element: <Produto />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      }       
+    ]
+  }
+
+]);
 
 function App() {
 
   return (
-    <Router>
-      <Routes>
-        <Route  path="/" element={<Menu/>}  >
-          <Route index   element={<Home />} />
-          <Route exact="true" path="categorias" element={<Categoria />} />
-          <Route exact="true" path="produtos" element={<Produto />} />
-        </Route>        
-      </Routes>
-    </Router>
+    <RouterProvider router={router} />
   );
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getProdutosAPI } from '../servicos/ProdutoServico';
-import { formatoMoeda } from '../componentes/comuns/Uteis';
-import Carregando from './comuns/Carregando';
+import { getProdutosAPI } from '../../servicos/ProdutoServico';
+import { formatoMoeda } from '../comuns/Uteis';
+import Carregando from '../comuns/Carregando';
 
 const Home = () => {
 

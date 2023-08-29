@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import CategoriaContext from './CategoriaContext';
-import Alerta from '../../Alerta';
+import Alerta from '../../comuns/Alerta';
 
 function Tabela() {
 

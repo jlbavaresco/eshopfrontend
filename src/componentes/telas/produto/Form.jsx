@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Alerta from '../../Alerta';
+import Alerta from '../../comuns/Alerta';
 import ProdutoContext from './ProdutoContext';
 import CampoEntrada from '../../comuns/CampoEntrada';
 import CampoSelect from '../../comuns/CampoSelect';

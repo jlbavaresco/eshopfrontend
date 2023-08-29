@@ -30,7 +30,8 @@ const Menu = () => {
                 </div>
             </nav>
             <Outlet />
-        </div>)
+        </div>
+    )
 };
 
 export default Menu;

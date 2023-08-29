@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import ProdutoContext from './ProdutoContext';
-import Alerta from '../../Alerta';
+import Alerta from '../../comuns/Alerta';
 import { formatoMoeda } from '../../comuns/Uteis'
 
 function Tabela() {
