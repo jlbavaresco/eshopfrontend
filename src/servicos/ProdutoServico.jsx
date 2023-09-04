@@ -1,3 +1,6 @@
+import Autenticacao from "../componentes/seguranca/Autenticacao";
+
+
 export const getProdutosAPI = async () => {
     const response = await fetch(`${process.env.REACT_APP_ENDERECO_API}/produto`,
         {
@@ -15,7 +18,8 @@ export const getProdutoPorCodigoAPI = async codigo => {
         {
             method: "GET",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": Autenticacao.pegaAutenticacao().token
             }
         });
     const data = await response.json();
@@ -27,7 +31,8 @@ export const deleteProdutoPorCodigoAPI = async codigo => {
         {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": Autenticacao.pegaAutenticacao().token
             }
         });
     const data = await response.json();
@@ -37,7 +42,10 @@ export const deleteProdutoPorCodigoAPI = async codigo => {
 export const cadastraProdutoAPI = async (objeto, metodo) => {
     const response = await fetch(`${process.env.REACT_APP_ENDERECO_API}/produto`, {
         method: metodo,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "authorization": Autenticacao.pegaAutenticacao().token
+        },
         body: JSON.stringify(objeto),
     })
     const data = await response.json();

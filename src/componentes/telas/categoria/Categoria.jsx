@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import CategoriaContext from './CategoriaContext';
 import Tabela from './Tabela';
 import Form from './Form';
 import {
-    getCategoriasAPI,getCategoriaPorCodigoAPI,
+    getCategoriasAPI, getCategoriaPorCodigoAPI,
     deleteCategoriaPorCodigoAPI, cadastraCategoriaAPI
-} from '../../../servicos/CategoriaServico'; 
+} from '../../../servicos/CategoriaServico';
 import Carregando from '../../comuns/Carregando';
+import WithAuth from '../../seguranca/WithAuth';
+
 
 function Categoria() {
+
+    let navigate = useNavigate();
 
     const [alerta, setAlerta] = useState({ status: "", message: "" });
     const [listaObjetos, setListaObjetos] = useState([]);
@@ -46,6 +51,8 @@ function Categoria() {
             }
         } catch (err) {
             console.error(err.message);
+            window.location.reload();
+            navigate("/login", { replace: true });
         }
         recuperaCategorias();
     }
@@ -57,16 +64,26 @@ function Categoria() {
     }
 
     const recuperaCategorias = async () => {
-        setCarregando(true);
-        setListaObjetos(await getCategoriasAPI());
-        setCarregando(false);
+        try {
+            setCarregando(true);
+            setListaObjetos(await getCategoriasAPI());
+            setCarregando(false);
+        } catch (err) {
+            window.location.reload();
+            navigate("/login", { replace: true });
+        }
     }
 
     const remover = async codigo => {
         if (window.confirm('Deseja remover este objeto?')) {
-            let retornoAPI = await deleteCategoriaPorCodigoAPI(codigo);
-            setAlerta({ status: retornoAPI.status, message: retornoAPI.message })
-            recuperaCategorias();
+            try {
+                let retornoAPI = await deleteCategoriaPorCodigoAPI(codigo);
+                setAlerta({ status: retornoAPI.status, message: retornoAPI.message })
+                recuperaCategorias();
+            } catch (err) {
+                window.location.reload();
+                navigate("/login", { replace: true });
+            }
         }
     }
 
@@ -94,4 +111,4 @@ function Categoria() {
     );
 }
 
-export default Categoria;
+export default WithAuth(Categoria);
