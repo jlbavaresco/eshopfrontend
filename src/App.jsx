@@ -10,6 +10,7 @@ import Categoria from './componentes/telas/categoria/Categoria'
 import Produto from './componentes/telas/produto/Produto'
 import NotFound from "./componentes/telas/NotFound";
 import Login from "./componentes/telas/login/Login";
+import Sobre from "./componentes/telas/Sobre";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
+      {
+        path: "sobre",
+        element: <Sobre />,
+      } ,     
       {
         path: "*",
         element: <NotFound />,
@@ -46,6 +51,10 @@ const router = createBrowserRouter([
         path: "produtos",
         element: <Produto />,
       },
+      {
+        path: "sobre",
+        element: <Sobre />,
+      } , 
       {
         path: "*",
         element: <NotFound />,
